@@ -4,9 +4,8 @@ tensorflow
 python-dotenv
 requests
 pyttsx3
-opencv
+opencv-python
 dotenv
 numpy
 firebase_admin
-datetime
 google.generativeai
