@@ -1,0 +1,12 @@
+streamlit
+pillow
+tensorflow
+python-dotenv
+requests
+pyttsx3
+opencv
+dotenv
+numpy
+firebase_admin
+datetime
+google.generativeai
