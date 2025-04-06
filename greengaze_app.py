@@ -37,8 +37,8 @@ genai.configure(api_key=GEMINI_API_KEY)
 
 # Initialize Firebase only if not already initialized
 if not firebase_admin._apps:
-    # Get the Firebase JSON secret from Streamlit secrets
-    firebase_json = st.secrets["firebase"]
+    # Convert AttrDict to regular dict
+    firebase_json = dict(st.secrets["firebase"])
 
     # Create a temporary JSON file to store credentials
     with tempfile.NamedTemporaryFile(delete=False, suffix=".json", mode="w") as tmp_file:
@@ -50,8 +50,6 @@ if not firebase_admin._apps:
     firebase_admin.initialize_app(cred)
 
 # Get Firestore client
-db = firestore.client()
-
 db = firestore.client()
 
 # Load Keras model
@@ -216,7 +214,7 @@ if selected == "Home":
     st.markdown("""
         <div style='background-color:#E8F5E9; padding:20px; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.1); margin-bottom:15px;'>
             <h4 style='color:#1B5E20; margin-bottom:10px;'>🌿 Contribute to Sustainability</h4>
-            <p style='font-size:15px; margin-bottom:0;'>By sharing your result, you're helping us make GreenGaze smarter. Data is anonymized and used only for improvement. 💚</p>
+            <p style='color:#1B5E20; font-size:15px; margin-bottom:0;'>By sharing your result, you're helping us make GreenGaze smarter. Data is anonymized and used only for improvement. 💚</p>
         </div>
     """, unsafe_allow_html=True)
 
