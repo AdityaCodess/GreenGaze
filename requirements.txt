@@ -4,7 +4,8 @@ tensorflow
 python-dotenv
 requests
 pyttsx3
-opencv-python
+opencv-python-headless
+dotenv
 numpy
-firebase-admin
-google-generativeai
+firebase_admin
+google.generativeai
