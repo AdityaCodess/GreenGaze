@@ -13,6 +13,9 @@ from firebase_admin import credentials, firestore
 from datetime import datetime
 import google.generativeai as genai
 
+GEMINI_API_KEY = st.secrets["gemini"]["api_key"]
+
+
 
 
 # Debug toggle
@@ -22,20 +25,33 @@ DEBUG = False
 with open("class_names.json", "r") as f:
     class_names = json.load(f)
 
-# Load environment variables
-load_dotenv()
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-ELEVEN_API_KEY = os.getenv("ELEVEN_API_KEY")
+# Load environment variables before dep/test in offline
+#load_dotenv()
+#GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+#ELEVEN_API_KEY = os.getenv("ELEVEN_API_KEY")
 
 
 
 # Configure Gemini and ElevenLabs
 genai.configure(api_key=GEMINI_API_KEY)
 
-# Firebase initialization
+# Initialize Firebase only if not already initialized
 if not firebase_admin._apps:
-    cred = credentials.Certificate("firebase-key.json")
+    # Get the Firebase JSON secret from Streamlit secrets
+    firebase_json = st.secrets["firebase"]
+
+    # Create a temporary JSON file to store credentials
+    with tempfile.NamedTemporaryFile(delete=False, suffix=".json", mode="w") as tmp_file:
+        json.dump(firebase_json, tmp_file)
+        tmp_path = tmp_file.name
+
+    # Initialize Firebase
+    cred = credentials.Certificate(tmp_path)
     firebase_admin.initialize_app(cred)
+
+# Get Firestore client
+db = firestore.client()
+
 db = firestore.client()
 
 # Load Keras model

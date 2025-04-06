@@ -8,5 +8,7 @@ firebase-key.json
 __pycache__/
 *.pyc
 
-# (Optional) Ignore Streamlit cache if needed
+#Ignore Streamlit cache
 .streamlit/cache/
+.secrets.toml
+.streamlit/secrets.toml
