@@ -123,13 +123,22 @@ def speak_text(text: str):
 
 def save_metadata_to_firestore(label, confidence, feedback=""):
     now = datetime.now().isoformat()
-    doc_ref = db.collection("waste_predictions").document()
+
+    # Create a reference to the collection for the class
+    collection_name = "waste_predictions"
+
+    # Create a reference to the document (document ID is auto-generated)
+    # Store each class as a subcollection within the main "waste_predictions" collection
+    doc_ref = db.collection(collection_name).document(label).collection("records").document()  # auto-generate document ID
+
+    # Set the document data
     doc_ref.set({
         "label": label,
         "confidence": confidence,
         "feedback": feedback,
         "timestamp": now
     })
+
 
 # UI Setup
 

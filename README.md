@@ -1,11 +1,11 @@
-# GreenGaze – Eco Waste Advisor (DeepSeek + Vision + Voice)
+# GreenGaze – Eco Waste Advisor (Gemini + Vision + Voice)
 
 GreenGaze helps you upload or capture waste items and get sustainable disposal advice aligned with India’s SDG 11.
 
 ## 🔥 Features
 
 - Object detection with your own trained model
-- Eco advice from DeepSeek AI
+- Eco advice from gemini AI
 - Text-to-Speech: it speaks your advice
 - Feedback option for smarter future tips
 
@@ -14,7 +14,7 @@ GreenGaze helps you upload or capture waste items and get sustainable disposal a
 1. Clone this repo
 2. Add `.env` file:
    ```
-   GEMINI_API_KEY=your-deepseek-key-here
+   GEMINI_API_KEY=your-gemini-key-here
    ```
 3. Install dependencies:
    ```
