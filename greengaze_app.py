@@ -8,15 +8,12 @@ from dotenv import load_dotenv
 import tempfile
 import json
 import cv2
-import firebase_admin
+import firebase_admin   
 from firebase_admin import credentials, firestore
 from datetime import datetime
 import google.generativeai as genai
 
 GEMINI_API_KEY = st.secrets["gemini"]["api_key"]
-
-
-
 
 # Debug toggle
 DEBUG = False
@@ -29,8 +26,6 @@ with open("class_names.json", "r") as f:
 #load_dotenv()
 #GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 #ELEVEN_API_KEY = os.getenv("ELEVEN_API_KEY")
-
-
 
 # Configure Gemini and ElevenLabs
 genai.configure(api_key=GEMINI_API_KEY)
@@ -52,8 +47,8 @@ if not firebase_admin._apps:
 # Get Firestore client
 db = firestore.client()
 
-# Load Keras model
-model = tf.keras.models.load_model("waste_classifier_model.h5")
+# Load Keras model (updated line)
+model = tf.keras.models.load_model("waste_classifier_model.h5", compile=False)
 
 def extract_roi(image: Image.Image) -> np.ndarray:
     img = image.copy().convert("RGB")
@@ -119,8 +114,6 @@ def speak_text(text: str):
     st.info("🔊 Voice instructions coming soon!")
     return None
 
-
-
 def save_metadata_to_firestore(label, confidence, feedback=""):
     now = datetime.now().isoformat()
 
@@ -138,7 +131,6 @@ def save_metadata_to_firestore(label, confidence, feedback=""):
         "feedback": feedback,
         "timestamp": now
     })
-
 
 # UI Setup
 
@@ -166,7 +158,7 @@ if selected == "Home":
 """, unsafe_allow_html=True)
 
  st.markdown("<h1 style='color:#1B5E20;'>🌿 GreenGaze</h1>", unsafe_allow_html=True)
- st.caption("Snap. Detect. Dispose smart. ♻️")
+ st.caption("Snap. Detect. Dispose smart.SDG11 ♻️")
 
  # Input
  with st.expander("📸 Choose Input Method", expanded=True):
@@ -241,9 +233,7 @@ if selected == "Home":
     elif submit_button and not consent:
         st.error("⚠️ Please check the box to give your consent.")
 
-
     st.markdown("<hr style='border: 1px solid #ddd;'/>", unsafe_allow_html=True)
-
 
 # ℹ️ About Page
 elif selected == "About":
@@ -308,25 +298,5 @@ elif selected == "Privacy Policy":
 elif selected == "Contact":
     st.markdown("<h1 style='color:#2E7D32;'>📬 Contact Us</h1>", unsafe_allow_html=True)
 
-    st.markdown("""
-    We'd love to hear from you! 💬 Whether it's feedback, collaboration, or just a hello 👋 — reach out!
-
-    ---
-    ### 📧 Email Us
-    **support@greengaze.app**
-
-    ---
-    ### 🌐 Connect with Us
-    - [GitHub Repo](https://github.com/your-repo) 🛠️  
-    - [Instagram: @GreenGazeApp](https://instagram.com/greengazeapp) 📸  
-
-    ---
-    ### 🤝 Collaborate
-    We’re open to:
-    - College eco-events ♻️  
-    - NGO partnerships 🌍  
-    - Hackathons 🧪  
-    - Green startup collabs 🚀
-
-    Let's build a sustainable world — together. 🌱
-    """)
+    st
+    
