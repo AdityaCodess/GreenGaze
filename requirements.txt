@@ -7,5 +7,5 @@ pyttsx3
 opencv-python-headless
 dotenv
 numpy
-firebase_admin
+firebase-admin
 google.generativeai
