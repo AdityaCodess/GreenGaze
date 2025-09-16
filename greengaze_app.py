@@ -48,7 +48,7 @@ if not firebase_admin._apps:
 db = firestore.client()
 
 # Load Keras model (updated line)
-model = tf.keras.models.load_model("waste_classifier_model.h5", compile=False)
+model = tf.keras.models.load_model("waste_classifier_model.keras", compile=False)
 
 def extract_roi(image: Image.Image) -> np.ndarray:
     img = image.copy().convert("RGB")
